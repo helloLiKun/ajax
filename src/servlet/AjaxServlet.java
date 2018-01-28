@@ -23,12 +23,14 @@ public class AjaxServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //解决上传参数中文乱码
-//        req.setCharacterEncoding("UTF-8");
+        req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html;charset=UTF-8");
+        //获取web.xml中的初始值
         System.out.println("-----config---------"+getServletConfig());
         ServletConfig servletConfig=getServletConfig();
         System.out.println("-----test-----"+servletConfig.getInitParameter("test"));
         System.out.println("-----test1-------"+servletConfig.getInitParameter("test1"));
+        //普通get/post请求（post请求传送json字符串的时候，不能用此方法）
         System.out.println("-----name-------"+req.getParameter("username"));
         System.out.println("-----password-------"+req.getParameter("password"));
 
