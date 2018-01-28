@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+</head>
+<body>
+<form>
+    <input id="name_id" name="username"/>
+    <input id="pwd_id" name="password"/>
+    <button type="button" onclick="sendReq()">提交</button>
+
+</form>
+</body>
+<script>
+    function sendReq() {
+        var name=document.getElementById("name_id")
+        var pwd=document.getElementById("pwd_id")
+        var user={'username':name.value,'password':pwd.value}
+        alert('username--------'+user.username+'====password---------'+user.password)
+        var xhr=getAjax();
+        if(xhr!=null){
+//            xhr.open('get','/ajax?username='+name.value+'&password='+pwd.value)
+            xhr.open('post','/ajax',true)
+            xhr.onreadystatechange=function () {
+                if(xhr.readyState==4 && xhr.status==200){
+                    var result=xhr.responseText;
+                    alert('result-----------'+result);
+                }
+            }
+            alert(name.value+'-----'+pwd.value)
+            //post请求必须加,非json数据
+//            xhr.setRequestHeader('content-type',
+//                'application/x-www-form-urlencoded;charset=UTF-8');
+            //post请求必须加,非json数据
+            xhr.withCredentials = true
+            xhr.setRequestHeader("Content-type","application/json;charset=UTF-8");//可以发送json格式字符串
+            alert('-----------------------------json----------------------------------')
+            alert(JSON.stringify(user))
+            alert('user-------------'+JSON.stringify(user))
+            xhr.send(JSON.stringify(user))
+//            xhr.send(null)
+        }
+    }
+    function getAjax() {
+        var xhr=null;
+        if(window.XMLHttpRequest){
+            alert("not ie")
+            xhr=new XMLHttpRequest();
+            //确保IE6可以运行，无视更古老的IE浏览器
+        }else{
+            alert("is ie")
+            xhr=new ActiveXObject('Microsoft.XMLHttp');
+        }
+        alert(xhr)
+        return xhr;
+    }
+</script>
+</html>
