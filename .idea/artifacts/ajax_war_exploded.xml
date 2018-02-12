@@ -9,7 +9,6 @@
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="org.thymeleaf:thymeleaf:Release" />
-          <element id="library" level="project" name="ojdbc14_g" />
         </element>
       </element>
     </root>
